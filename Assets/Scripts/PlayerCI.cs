@@ -19,14 +19,14 @@ public class PlayerCI : MonoBehaviour
     
     
     public int cooldown = 5, turns = 0, turnLimit = 200;
-    public Text turnText;
+    public Text turnText, z;
     public bool dead = false;
     public Tilemap map;
     public Tilemap tilesType;
    // Start() var einhvern hluta vegna að ekki virka svo að ég notaði Awake() í staðin
     void Awake() 
     {   
-        turnText.text = turnLimit.ToString() + "/" + turns.ToString();
+        turnText.text = "Skref: " + turnLimit.ToString() + "/" + turns.ToString();
         gender = (GENDER)Random.Range(0,1);
         
          
@@ -86,7 +86,7 @@ public class PlayerCI : MonoBehaviour
             dir = dire;
             
         }
-        // Annars hreyfa spilaran og telja skref
+        // Annars gá hvershvonar landslagi spilarinn er á
         else
         {
             TileBase thorp = tilesType.GetTile(new Vector3Int(0,0,0));
@@ -116,14 +116,14 @@ public class PlayerCI : MonoBehaviour
             }       
         }
     }
+    //  hreyfa spilaran og telja skref
     void move(Vector3 d, int modTurn)
     {
-        Debug.Log(d);
         moving = true;
         pos += d;
         dir = 0;
         turns+=modTurn;
-        turnText.text = turnLimit.ToString() + "/" + turns.ToString();
+        turnText.text = "Skref: " + turnLimit.ToString() + "/" + turns.ToString();
         // ef skref er sama og skref takmörk þá setja dauður á satt
         if (turns >= turnLimit)
         {
